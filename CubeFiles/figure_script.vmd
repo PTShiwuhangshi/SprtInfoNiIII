@@ -1,0 +1,103 @@
+# VMD脚本 - 发表质量轨道图形
+# 用于生成类似文献中的活性轨道示意图
+
+# 高质量显示设置
+display projection Orthographic
+display depthcue off
+display shadows off
+display ambientocclusion off
+color Display Background white
+
+# 加载分子结构
+mol new active_orbitals/Ag_occ*.cub
+mol modstyle 0 0 CPK 1.2 0.2 12.0 12.0
+mol modcolor 0 0 Name
+mol modmaterial 0 0 HardPlastic
+
+# 轨道显示设置
+set isovalue 0.035
+
+
+# B1u 轨道 (占据数: 1.006)
+mol new "active_orbitals/B1u_occ1.006_pos.cub"
+mol modstyle 0 1 Isosurface $isovalue 0 0 0 1 1
+mol modcolor 0 1 ColorID 1  # 蓝色为正
+mol modmaterial 0 1 Transparent
+
+mol new "active_orbitals/B1u_occ1.006_neg.cub"
+mol modstyle 0 2 Isosurface $isovalue 0 0 0 1 1  
+mol modcolor 0 2 ColorID 0  # 红色为负
+mol modmaterial 0 2 Transparent
+
+# Ag 轨道 (占据数: 0.174)
+mol new "active_orbitals/Ag_occ0.174_pos.cub"
+mol modstyle 0 3 Isosurface $isovalue 0 0 0 1 1
+mol modcolor 0 3 ColorID 1  # 蓝色为正
+mol modmaterial 0 3 Transparent
+
+mol new "active_orbitals/Ag_occ0.174_neg.cub"
+mol modstyle 0 4 Isosurface $isovalue 0 0 0 1 1  
+mol modcolor 0 4 ColorID 0  # 红色为负
+mol modmaterial 0 4 Transparent
+
+# B2u 轨道 (占据数: 1.826)
+mol new "active_orbitals/B2u_occ1.826_pos.cub"
+mol modstyle 0 5 Isosurface $isovalue 0 0 0 1 1
+mol modcolor 0 5 ColorID 1  # 蓝色为正
+mol modmaterial 0 5 Transparent
+
+mol new "active_orbitals/B2u_occ1.826_neg.cub"
+mol modstyle 0 6 Isosurface $isovalue 0 0 0 1 1  
+mol modcolor 0 6 ColorID 0  # 红色为负
+mol modmaterial 0 6 Transparent
+
+# B3g 轨道 (占据数: 0.139)
+mol new "active_orbitals/B3g_occ0.139_pos.cub"
+mol modstyle 0 7 Isosurface $isovalue 0 0 0 1 1
+mol modcolor 0 7 ColorID 1  # 蓝色为正
+mol modmaterial 0 7 Transparent
+
+mol new "active_orbitals/B3g_occ0.139_neg.cub"
+mol modstyle 0 8 Isosurface $isovalue 0 0 0 1 1  
+mol modcolor 0 8 ColorID 0  # 红色为负
+mol modmaterial 0 8 Transparent
+
+# B3u 轨道 (占据数: 1.861)
+mol new "active_orbitals/B3u_occ1.861_pos.cub"
+mol modstyle 0 9 Isosurface $isovalue 0 0 0 1 1
+mol modcolor 0 9 ColorID 1  # 蓝色为正
+mol modmaterial 0 9 Transparent
+
+mol new "active_orbitals/B3u_occ1.861_neg.cub"
+mol modstyle 0 10 Isosurface $isovalue 0 0 0 1 1  
+mol modcolor 0 10 ColorID 0  # 红色为负
+mol modmaterial 0 10 Transparent
+
+# Ag 轨道 (占据数: 1.876)
+mol new "active_orbitals/Ag_occ1.876_pos.cub"
+mol modstyle 0 11 Isosurface $isovalue 0 0 0 1 1
+mol modcolor 0 11 ColorID 1  # 蓝色为正
+mol modmaterial 0 11 Transparent
+
+mol new "active_orbitals/Ag_occ1.876_neg.cub"
+mol modstyle 0 12 Isosurface $isovalue 0 0 0 1 1  
+mol modcolor 0 12 ColorID 0  # 红色为负
+mol modmaterial 0 12 Transparent
+
+# 优化视图
+rotate x by -60
+rotate y by 20
+scale by 1.3
+
+# 渲染设置
+display rendermode GLSL
+display cuemode Linear
+
+puts "=== 关键活性轨道加载完成 ==="
+puts "正相位: 蓝色, 负相位: 红色"
+puts "等值面值: $isovalue"
+puts ""
+puts "建议导出设置:"
+puts "1. 调整等值面值获得最佳效果"
+puts "2. 使用Tachyon渲染器导出高质量图片"
+puts "3. 在图片编辑软件中添加占据数标签和箭头"
